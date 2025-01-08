@@ -1,0 +1,29 @@
+{
+  "name": "nodejs-membersonly",
+  "version": "1.0.0",
+  "description": "An exclusive Membership site where members can post anonymous messages. Non-members can view the posts without knowing the authors, while members and admins enjoy special privileges. Built using **Node.js**, **Express**, **Passport.js**, and **PostgreSQL**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1Amal/NodeJs-MembersOnly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/1Amal/NodeJs-MembersOnly/issues"
+  },
+  "homepage": "https://github.com/1Amal/NodeJs-MembersOnly#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.13.1"
+  }
+}
