@@ -1,17 +1,15 @@
-const {Router} =require("express");
+const { Router } = require("express");
 
-const appRouter=Router();
+const appRouter = Router();
 
-appRouter.get("/", (req, res) => {
-    res.render("index");
-  });
+const membersController = require("../controllers/membersController");
 
-appRouter.get("/new",(req,res)=>{
-    res.render("new-message");
-});
+appRouter.get("/", membersController.homePageNotLogged);
 
-appRouter.get("/logged",(req,res)=>{
-    res.render("logged")
-});
+appRouter.get("/new", membersController.newMessage);
 
-module.exports=appRouter;
+appRouter.get("/authorized", membersController.userAuthorized);
+
+appRouter.get("/notauthorized", membersController.userNotAuthorized);
+
+module.exports = appRouter;
