@@ -11,7 +11,7 @@ first_name VARCHAR(100),
 last_name VARCHAR(300),
 username VARCHAR(300) UNIQUE NOT NULL,
 password VARCHAR(100) NOT NULL,
-membership_status VARCHAR(100),
+membership_status BOOLEAN DEFAULT FALSE,
 admin BOOLEAN DEFAULT FALSE
 );
 INSERT INTO users_table(
@@ -22,9 +22,51 @@ VALUES
 'Picard',
 'jeanluc@startrek.universe',
 '20252025',
-'member',
+'TRUE',
 'TRUE'
+),
+(
+'William',
+'Riker',
+'williamr@startrek.universe',
+'Alaska',
+'TRUE',
+'TRUE'
+),
+(
+'Geordi',
+'La Forge',
+'gerodi@startrek.universe',
+'wiser2025',
+'TRUE',
+'TRUE'
+),
+(
+'Data',
+'',
+'data@startrek.universe',
+'20252025',
+'TRUE',
+'TRUE'
+
+),
+(
+'Worf',
+'',
+'worf@startrek.universe',
+'IamKlingon',
+'TRUE',
+'FALSE'
+),
+(
+'Q',
+'',
+'q@qcontinuum.q',
+'qIsAwesome',
+'FALSE',
+'FALSE'
 )
+
 ON CONFLICT (username) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS messages(
