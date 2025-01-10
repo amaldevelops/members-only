@@ -15,6 +15,13 @@ app.set("views", path.join(__dirname, "views"));
 const appRouter=require("./routes/appRouter");
 app.use("/", appRouter);
 
-app.listen(process.env.APP_PORT, () =>
+
+app.use((err,req,res,next)=>{
+  console.error(err.stack);
+  res.status(500).send("Something Went Wrong, Developer please check the server logs, if you are an user contact the developer");
+});
+
+app.listen(process.env.APP_PORT || 3000, () =>
   console.log(`Members Only Site Running on localhost:${process.env.APP_PORT}`)
 );
+
