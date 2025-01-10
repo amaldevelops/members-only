@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome To Casio Watch Club</title>
-</head>
-<body>
+  </head>
+  <body>
     <div>
-        <a href="/">Logout</a>
-        <h1>Logged in ! Welcome To Casio Watch Club</h1>
-
+      <a href="/">Logout</a>
+      <h1>Logged in ! Welcome To Casio Watch Club</h1>
     </div>
-</body>
+    <div>
+      <h1>Messages</h1>
+
+      <a href="/new">Create New Message</a>
+
+      <form method="post" action="/authorized">
+        <button type="submit">Delete Message (Only Admins)</button>
+      </form>
+    </div>
+  </body>
 </html>
