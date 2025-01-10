@@ -15,6 +15,11 @@ app.set("views", path.join(__dirname, "views"));
 const appRouter=require("./routes/appRouter");
 app.use("/", appRouter);
 
+// Error Handling
+
+app.use((req,res)=>{
+  res.status(404).render("notAuthorized",{url:req.url});
+});
 
 app.use((err,req,res,next)=>{
   console.error(err.stack);
