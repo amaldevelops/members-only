@@ -47,15 +47,17 @@ async function SQLAuthorizedGetAllMessages() {
   }
 }
 
-async function SQLAuthorizedNewMessageSave() {
+async function SQLAuthorizedNewMessageSave(newMessage) {
   try {
     const query = `INSERT INTO messages(title,content,author_id)
       VALUES($1,$2,$3)`;
-    const message = [
-      "CASIO AE-1500 is pretty awesome",
-      "CASIO AE-1500 is pretty awesome",
-      1,
-    ];
+    // const message = [
+    //   "CASIO AE-1500 is pretty awesome",
+    //   "CASIO AE-1500 is pretty awesome",
+    //   1,
+    // ];
+    console.log(newMessage)
+    const message=[newMessage.title,newMessage.content,newMessage.author_id]
 
     const { rows } = await pool.query(query, message);
   } catch (error) {
@@ -83,6 +85,4 @@ module.exports = {
   SQLUnauthorizedGetAllMessages,
   SQLAuthorizedGetAllMessages,
   SQLAuthorizedNewMessageSave,
- 
-
-};
+ };

@@ -46,8 +46,8 @@ async function AuthorizedNewMessageSave(req, res, next) {
 
     }
 
-    console.log(newMessage);
-    // const messageSave = await db.SQLAuthorizedNewMessageSave();
+    // console.log(newMessage);
+    const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
   } catch (err) {
     next(err);
   }
