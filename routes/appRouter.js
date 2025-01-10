@@ -5,13 +5,15 @@ const appRouter = Router();
 const membersController = require("../controllers/membersController");
 
 appRouter.get("/", membersController.homePageNotLogged);
+appRouter.post("/", membersController.AuthenticateUser);
 
 appRouter.get("/new", membersController.newMessage);
 
 appRouter.post("/new", membersController.AuthorizedNewMessageSave);
 
-// appRouter.post("authorized",membersController.userAuthorized);
+// appRouter.post("authorized",membersController.AuthenticateUser);
 appRouter.get("/authorized", membersController.userAuthorized);
+appRouter.post("/authorized", membersController.NewUserCreate);
 
 
 appRouter.get("/notauthorized", membersController.userNotAuthorized);
