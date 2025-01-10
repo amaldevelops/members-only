@@ -71,23 +71,65 @@ ON CONFLICT (username) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS messages(
 id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+author_id INTEGER NOT NULL,
 title VARCHAR(200),
 timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
 content VARCHAR(1000),
-author_name VARCHAR(300),
-author_id INTEGER NOT NULL,
 FOREIGN KEY (author_id) REFERENCES users_table(id) ON DELETE CASCADE
 );
 
 
-INSERT INTO messages(title,content,author_name,author_id )
+INSERT INTO messages(title,content,author_id )
 VALUES
 (
 'CASIO watches are the best',
 'I find that CASIO watches are durable and accurate and as a StarShip captain who travels to different planets I find them to be awesome !',
-'Jean Luc',
 1
-);`;
+),
+(
+'Jean Luc you are been tested',
+'Q Continuum is Keeping an eye on human race and you have to prove you are worthy to exist !',
+6
+),
+(
+'Q You are not welcome in this club, please leave',
+'Q You are not welcome in this club, please leave, Worf make sure Q is expelled from the forum!',
+1
+),
+(
+'Yes Captain, I will take care of this security breach',
+'Yes Captain, I will take care of this security breach',
+5
+),
+(
+'I don''t understand why people spend millions on Patek Philippe watches?',
+'I don''t understand why people spend millions on Patek Philippe watches, they are only able to tell time and not as accurate as Casios',
+4
+),
+(
+'PP watches are bought by people in the 21st century to show wealth !',
+'PP watches are bought by people in the 21st century to show wealth and they are mostly used for store of value, they are normally not used as daily watches !',
+3
+),
+(
+'My dad gave me his PP watch as a heirloom but I use a Casio watch for daily wear',
+'My dad gave me his PP watch as a heirloom but I use a Casio watch for daily wear. For me Casio watches are the most practical, cost effective, accurate watches ever built by humans !',
+2
+),
+(
+'Humans are stupid, Q don''t need watches to tell the time!',
+'Humans are stupid, Q don''t need watches to tell the time, Q are limitless and timeless, humans are been tested by Q!',
+6
+),
+(
+'Captain seeking permission to Drop the table and rebuild it so Q losses access to the Forum',
+'Captain seeking permission to Drop the table and rebuild it so Q losses access to the Forum',
+3
+),
+(
+'Geordie, Proceed with you plan, Goodbye Q!',
+'Geordie, Proceed with you plan, Goodbye Q!',
+1);`;
 
 async function main() {
   console.log("Seeding data to database....");
