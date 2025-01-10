@@ -38,13 +38,12 @@ async function userNotAuthorized(req, res, next) {
 
 async function AuthorizedNewMessageSave(req, res, next) {
   try {
-    const newMessage= {
-      title:req.body.title,
-      content:req.body.content,
-      author_name:req.body.author_name,
-      author_id:req.body.author_id
-
-    }
+    const newMessage = {
+      title: req.body.title,
+      content: req.body.content,
+      author_name: req.body.author_name,
+      author_id: req.body.author_id,
+    };
 
     // console.log(newMessage);
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
@@ -77,8 +76,9 @@ async function NewUserCreate(req, res, next) {
       admin: req.body.admin,
     };
 
-    console.log(newUserData);
+    const createUser = await db.SQLNewUserCreate(newUserData);
 
+    console.log(newUserData);
   } catch (err) {
     next(err);
   }
