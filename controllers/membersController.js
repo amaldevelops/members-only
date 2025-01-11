@@ -76,6 +76,23 @@ async function NewUserCreate(req, res, next) {
       admin: req.body.admin,
     };
 
+    if (newUserData.membership_status==="Casio2025" )
+    {
+      newUserData.membership_status=true;
+      
+    }
+
+    else if(newUserData.admin==="casio2025Admin")
+    {
+      newUserData.admin=true;
+    }
+
+    else 
+    {
+      newUserData.membership_status=false;
+      newUserData.admin=false;
+    }
+
     const createUser = await db.SQLNewUserCreate(newUserData);
 
     console.log(newUserData);
