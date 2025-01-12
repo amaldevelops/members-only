@@ -1,5 +1,7 @@
 const db = require("../db/dbQueries");
 
+require("dotenv").config();
+
 async function homePageNotLogged(req, res, next) {
   try {
     const allMessages = await db.SQLUnauthorizedGetAllMessages();
@@ -49,6 +51,7 @@ async function AuthorizedNewMessageSave(req, res, next) {
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
   } catch (err) {
     next(err);
+    // res.send("Invalid Signup form")
   }
 }
 
@@ -58,7 +61,18 @@ async function AuthenticateUser(req, res, next) {
       username: req.body.username,
       password: req.body.password,
     };
-    console.log(authenticationData);
+
+    const checkForUserDetails = await db.SQLAuthenticateUser(
+      authenticationData
+    );
+    // console.log(authenticationData);
+    console.log(checkForUserDetails);
+
+    if (checkForUserDetails.success === true) {
+      res.render("authorized");
+    } else {
+      res.render("notAuthorized");
+    }
   } catch (err) {
     next(err);
   }
@@ -77,15 +91,15 @@ async function NewUserCreate(req, res, next) {
     };
 
     if (
-      newUserData.membership_status === "Casio2025" &&
-      newUserData.admin === "casio2025Admin"
+      newUserData.membership_status === process.env.INVITATION_CODE &&
+      newUserData.admin === process.env.ADMIN_CODE
     ) {
       newUserData.membership_status = true;
       newUserData.admin = true;
-    } else if (newUserData.membership_status === "Casio2025") {
+    } else if (newUserData.membership_status === process.env.INVITATION_CODE) {
       newUserData.membership_status = true;
       newUserData.admin = false;
-    } else if (newUserData.admin === "casio2025Admin") {
+    } else if (newUserData.admin === process.env.ADMIN_CODE) {
       newUserData.membership_status = false;
       newUserData.admin = true;
     } else {

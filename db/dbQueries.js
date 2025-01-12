@@ -1,9 +1,31 @@
 const pool = require("./pool");
 
-async function SQLAuthenticateUser() {
+async function SQLAuthenticateUser(authenticationData) {
   try {
+    const query="SELECT users_table.username, users_table.password FROM users_table WHERE users_table.username=$1 AND users_table.password=$2"
+
+    const userNamePassword=[authenticationData.username,authenticationData.password]
+
+    const {rows} = await pool.query(query,userNamePassword);
+
+    if (rows.length>0)
+    {
+      return{
+        success:true,
+        message:"Authentication Successful",
+        user:rows[0]
+      };
+
+    }
+    else{
+      return{
+        success:false,
+        message:"Authentication Failure"
+      };
+    };
+
   } catch (error) {
-    console.error("Error Saving message - Authorized state", error.message);
+    console.error("Error Authenticating user - Unauthorized state", error.message);
     throw error;
   }
 }
