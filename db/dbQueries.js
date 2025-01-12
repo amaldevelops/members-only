@@ -69,7 +69,7 @@ async function SQLUnauthorizedGetAllMessages() {
 async function SQLAuthorizedGetAllMessages() {
   try {
     const { rows } = await pool.query(
-      "SELECT users_table.first_name,messages.title,messages.content FROM users_table INNER JOIN messages ON users_table.id = messages.author_id;"
+      "SELECT users_table.first_name,users_table.admin, messages.timestamp,messages.title,messages.content FROM users_table INNER JOIN messages ON users_table.id = messages.author_id;"
     );
     return rows;
   } catch (error) {

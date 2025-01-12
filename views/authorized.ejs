@@ -11,13 +11,30 @@
       <h1>Logged in ! Welcome To Casio Watch Club</h1>
     </div>
     <div>
-      <h1>Messages</h1>
+      <div>
+        <h1>Latest Messages</h1>
+        <ul>
+          <%if (allMessages.length>0){%> <%allMessages.forEach(result=>{ %>
+          <li>
+            <strong>Time:</strong> <%=result.timestamp%>,
+            <strong>User:</strong> <%=result.first_name%>,
+            <strong>Title:</strong> <%=result.title%>,
+            <strong>Content :</strong> <%=result.content%>
+            <%if(result.admin===true){%>
+
+            <form method="post" action="/authorized">
+              <button type="submit">Delete Message (Only Admins)</button>
+            </form>
+            <%}%>
+          </li>
+          <% }); %> <%}else{%>
+          <p>No Messages</p>
+
+          <%}%>
+        </ul>
+      </div>
 
       <a href="/new">Create New Message</a>
-
-      <form method="post" action="/authorized">
-        <button type="submit">Delete Message (Only Admins)</button>
-      </form>
     </div>
   </body>
 </html>

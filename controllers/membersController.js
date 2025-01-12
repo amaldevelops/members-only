@@ -24,7 +24,7 @@ async function userAuthorized(req, res, next) {
   try {
     const allMessages = await db.SQLAuthorizedGetAllMessages();
     // console.log(allMessages);
-    res.render("authorized");
+    res.render("authorized", {allMessages:allMessages});
   } catch (err) {
     next(err);
   }
@@ -108,6 +108,8 @@ async function NewUserCreate(req, res, next) {
     }
 
     const createUser = await db.SQLNewUserCreate(newUserData);
+
+    res.render("accountcreated");
 
     console.log(newUserData);
   } catch (err) {
