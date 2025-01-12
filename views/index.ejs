@@ -10,10 +10,6 @@
       <h1>Welcome To Casio Watch Club, Members only Site !</h1>
 
       <div>
-        <h1>Latest Messages</h1>
-      </div>
-
-      <div>
         <h2>Signin to your account</h2>
 
         <form method="POST" action="/">
@@ -52,28 +48,49 @@
         </ol>
         <form method="POST" action="/authorized">
           <label for="first_name">First Name: </label><br />
-          <input type="text" name="first_name" id="first_name" 
-          value="Rookie"
-          required />
+          <input
+            type="text"
+            name="first_name"
+            id="first_name"
+            value="Rookie"
+            required
+          />
           <br />
 
           <label for="last_name">Last Name:</label><br />
-          <input type="text" name="last_name" id="last_name" 
-          value="Jones" required/><br />
+          <input
+            type="text"
+            name="last_name"
+            id="last_name"
+            value="Jones"
+            required
+          /><br />
 
           <label for="username">E-mail (This will be your username):</label
           ><br />
-          <input type="email" name="username" id="username" value="rookie@rookie.com.au" required /><br />
+          <input
+            type="email"
+            name="username"
+            id="username"
+            value="rookie@rookie.com.au"
+            required
+          /><br />
 
           <label for="password">Password:</label><br />
-          <input type="password" name="password" id="password" value="20252025" required /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value="20252025"
+            required
+          /><br />
 
           <label for="password_confirm">Confirm Password:</label><br />
           <input
             type="password"
             name="password_confirm"
             id="password_confirm"
-            value="20252025" 
+            value="20252025"
             required
           /><br />
 
@@ -87,11 +104,33 @@
           /><br />
 
           <label for="admin">Admin Code: </label><br />
-          <input type="text" name="admin" id="admin" value="false"
-          required /><br />
+          <input
+            type="text"
+            name="admin"
+            id="admin"
+            value="false"
+            required
+          /><br />
 
           <button type="submit">Signup</button>
+          <button type="reset">Reset</button>
         </form>
+      </div>
+
+      <div>
+        <h1>Latest Messages</h1>
+        <ul>
+          <%if (allMessages.length>0){%> <%allMessages.forEach(result=>{ %>
+          <li>
+            <strong>Time:</strong> <%=result.timestamp%>,
+            <strong>Title:</strong> <%=result.title%>,
+            <strong>Content :</strong> <%=result.content%>
+          </li>
+          <% }); %> <%}else{%>
+          <p>No Messages</p>
+
+          <%}%>
+        </ul>
       </div>
     </div>
   </body>

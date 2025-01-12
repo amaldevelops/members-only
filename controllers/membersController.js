@@ -5,8 +5,8 @@ require("dotenv").config();
 async function homePageNotLogged(req, res, next) {
   try {
     const allMessages = await db.SQLUnauthorizedGetAllMessages();
-    // console.log(allMessages);
-    res.render("index");
+    console.log(allMessages);
+    res.render("index", {allMessages:allMessages});
   } catch (err) {
     next(err);
   }
