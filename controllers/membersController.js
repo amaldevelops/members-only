@@ -76,21 +76,21 @@ async function NewUserCreate(req, res, next) {
       admin: req.body.admin,
     };
 
-    if (newUserData.membership_status==="Casio2025" )
-    {
-      newUserData.membership_status=true;
-      
-    }
-
-    else if(newUserData.admin==="casio2025Admin")
-    {
-      newUserData.admin=true;
-    }
-
-    else 
-    {
-      newUserData.membership_status=false;
-      newUserData.admin=false;
+    if (
+      newUserData.membership_status === "Casio2025" &&
+      newUserData.admin === "casio2025Admin"
+    ) {
+      newUserData.membership_status = true;
+      newUserData.admin = true;
+    } else if (newUserData.membership_status === "Casio2025") {
+      newUserData.membership_status = true;
+      newUserData.admin = false;
+    } else if (newUserData.admin === "casio2025Admin") {
+      newUserData.membership_status = false;
+      newUserData.admin = true;
+    } else {
+      newUserData.membership_status = false;
+      newUserData.admin = false;
     }
 
     const createUser = await db.SQLNewUserCreate(newUserData);

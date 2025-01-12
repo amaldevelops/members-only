@@ -52,24 +52,29 @@
         </ol>
         <form method="POST" action="/authorized">
           <label for="first_name">First Name: </label><br />
-          <input type="text" name="first_name" id="first_name" required />
+          <input type="text" name="first_name" id="first_name" 
+          value="Rookie"
+          required />
           <br />
 
           <label for="last_name">Last Name:</label><br />
-          <input type="text" name="last_name" id="last_name" /><br />
+          <input type="text" name="last_name" id="last_name" 
+          value="Jones" required/><br />
 
           <label for="username">E-mail (This will be your username):</label
           ><br />
-          <input type="email" name="username" id="username" /><br />
+          <input type="email" name="username" id="username" value="rookie@rookie.com.au" required /><br />
 
           <label for="password">Password:</label><br />
-          <input type="password" name="password" id="password" /><br />
+          <input type="password" name="password" id="password" value="20252025" required /><br />
 
           <label for="password_confirm">Confirm Password:</label><br />
           <input
-            type="password_confirm"
+            type="password"
             name="password_confirm"
             id="password_confirm"
+            value="20252025" 
+            required
           /><br />
 
           <label for="membership_status">Invitation Code:</label><br />
@@ -77,10 +82,13 @@
             type="text"
             name="membership_status"
             id="membership_status"
+            value="false"
+            required
           /><br />
 
           <label for="admin">Admin Code: </label><br />
-          <input type="text" name="admin" id="admin" /><br />
+          <input type="text" name="admin" id="admin" value="false"
+          required /><br />
 
           <button type="submit">Signup</button>
         </form>
