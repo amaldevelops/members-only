@@ -13,10 +13,11 @@ appRouter.post("/new", membersController.AuthorizedNewMessageSave);
 
 // appRouter.post("authorized",membersController.AuthenticateUser);
 appRouter.get("/authorized", membersController.userAuthorized);
-// appRouter.post("/authorized", );
+// appRouter.post("/authorized:id", membersController.DeleteMessage);
 
-appRouter.post("/accountcreated", membersController.NewUserCreate)
+appRouter.post("/accountcreated", membersController.NewUserCreate);
 
+appRouter.post("/messagedeleted:id", membersController.DeleteMessage);
 
 appRouter.get("/notauthorized", membersController.userNotAuthorized);
 

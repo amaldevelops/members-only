@@ -16,13 +16,14 @@
         <ul>
           <%if (allMessages.length>0){%> <%allMessages.forEach(result=>{ %>
           <li>
+            <strong>ID:</strong> <%=result.id%>,
             <strong>Time:</strong> <%=result.timestamp%>,
             <strong>User:</strong> <%=result.first_name%>,
             <strong>Title:</strong> <%=result.title%>,
             <strong>Content :</strong> <%=result.content%>
             <%if(result.admin===true){%>
 
-            <form method="post" action="/authorized">
+            <form method="post" action="/messagedeleted<%=result.id%>">
               <button type="submit">Delete Message (Only Admins)</button>
             </form>
             <%}%>

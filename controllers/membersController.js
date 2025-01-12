@@ -6,7 +6,7 @@ async function homePageNotLogged(req, res, next) {
   try {
     const allMessages = await db.SQLUnauthorizedGetAllMessages();
     console.log(allMessages);
-    res.render("index", {allMessages:allMessages});
+    res.render("index", { allMessages: allMessages });
   } catch (err) {
     next(err);
   }
@@ -24,7 +24,7 @@ async function userAuthorized(req, res, next) {
   try {
     const allMessages = await db.SQLAuthorizedGetAllMessages();
     // console.log(allMessages);
-    res.render("authorized", {allMessages:allMessages});
+    res.render("authorized", { allMessages: allMessages });
   } catch (err) {
     next(err);
   }
@@ -119,6 +119,11 @@ async function NewUserCreate(req, res, next) {
 
 async function DeleteMessage(req, res, next) {
   try {
+    const messageID = req.params.id;
+    console.log(messageID);
+
+    await db.SQLDeleteMessage(messageID);
+    res.render("messagedeleted");
   } catch (err) {
     next(err);
   }

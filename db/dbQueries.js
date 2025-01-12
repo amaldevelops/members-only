@@ -2,30 +2,33 @@ const pool = require("./pool");
 
 async function SQLAuthenticateUser(authenticationData) {
   try {
-    const query="SELECT users_table.username, users_table.password FROM users_table WHERE users_table.username=$1 AND users_table.password=$2"
+    const query =
+      "SELECT users_table.username, users_table.password FROM users_table WHERE users_table.username=$1 AND users_table.password=$2";
 
-    const userNamePassword=[authenticationData.username,authenticationData.password]
+    const userNamePassword = [
+      authenticationData.username,
+      authenticationData.password,
+    ];
 
-    const {rows} = await pool.query(query,userNamePassword);
+    const { rows } = await pool.query(query, userNamePassword);
 
-    if (rows.length>0)
-    {
-      return{
-        success:true,
-        message:"Authentication Successful",
-        user:rows[0]
+    if (rows.length > 0) {
+      return {
+        success: true,
+        message: "Authentication Successful",
+        user: rows[0],
       };
-
+    } else {
+      return {
+        success: false,
+        message: "Authentication Failure",
+      };
     }
-    else{
-      return{
-        success:false,
-        message:"Authentication Failure"
-      };
-    };
-
   } catch (error) {
-    console.error("Error Authenticating user - Unauthorized state", error.message);
+    console.error(
+      "Error Authenticating user - Unauthorized state",
+      error.message
+    );
     throw error;
   }
 }
@@ -69,7 +72,7 @@ async function SQLUnauthorizedGetAllMessages() {
 async function SQLAuthorizedGetAllMessages() {
   try {
     const { rows } = await pool.query(
-      "SELECT users_table.first_name,users_table.admin, messages.timestamp,messages.title,messages.content FROM users_table INNER JOIN messages ON users_table.id = messages.author_id;"
+      "SELECT messages.id,users_table.first_name,users_table.admin, messages.timestamp,messages.title,messages.content FROM users_table INNER JOIN messages ON users_table.id = messages.author_id;"
     );
     return rows;
   } catch (error) {
@@ -96,8 +99,13 @@ async function SQLAuthorizedNewMessageSave(newMessage) {
   }
 }
 
-async function SQLDeleteMessage() {
+async function SQLDeleteMessage(id) {
   try {
+    const query = "DELETE from messages WHERE id=$1";
+    console.log(id);
+    const { rows } = await pool.query(query, [id]);
+
+    return { status: "Successfully deleted" };
   } catch (error) {
     console.error("Error Saving message - Authorized state", error.message);
     throw error;
