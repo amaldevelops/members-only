@@ -4,6 +4,8 @@ const appRouter = Router();
 
 const membersController = require("../controllers/membersController");
 
+const {validateUserCreation}=require("../validators/formvalidation")
+
 appRouter.get("/", membersController.homePageNotLogged);
 appRouter.post("/", membersController.AuthenticateUser);
 
@@ -15,7 +17,7 @@ appRouter.post("/new", membersController.AuthorizedNewMessageSave);
 appRouter.get("/authorized", membersController.userAuthorized);
 // appRouter.post("/authorized:id", membersController.DeleteMessage);
 
-appRouter.post("/accountcreated", membersController.NewUserCreate);
+appRouter.post("/accountcreated", validateUserCreation,membersController.NewUserCreate);
 
 appRouter.post("/messagedeleted:id", membersController.DeleteMessage);
 

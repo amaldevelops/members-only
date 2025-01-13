@@ -1,5 +1,7 @@
 const db = require("../db/dbQueries");
 
+const { body, validationResult } = require("express-validator");
+
 require("dotenv").config();
 
 async function homePageNotLogged(req, res, next) {
@@ -79,6 +81,14 @@ async function AuthenticateUser(req, res, next) {
 }
 
 async function NewUserCreate(req, res, next) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).render("error", {
+      errors: errors.array(),
+    });
+  }
+
   try {
     const newUserData = {
       first_name: req.body.first_name,
@@ -113,6 +123,7 @@ async function NewUserCreate(req, res, next) {
 
     console.log(newUserData);
   } catch (err) {
+    console.error("Error Creating user:", err.message);
     next(err);
   }
 }
