@@ -57,11 +57,9 @@ async function AuthorizedNewMessageSave(req, res, next) {
       author_id: req.body.author_id,
     };
 
-    // console.log(newMessage);
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
 
     const allMessages = await db.SQLAuthorizedGetAllMessages();
-    // console.log(allMessages);
     res.render("authorized", { allMessages: allMessages });
   } catch (err) {
     next(err);

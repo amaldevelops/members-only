@@ -15,6 +15,14 @@ app.set("views", path.join(__dirname, "views"));
 const appRouter=require("./routes/appRouter");
 app.use("/", appRouter);
 
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+
+app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(passport.session());
+
 // Error Handling
 
 app.use((req,res)=>{
