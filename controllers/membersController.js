@@ -81,15 +81,14 @@ async function AuthenticateUser(req, res, next) {
 }
 
 async function NewUserCreate(req, res, next) {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).render("error", {
-      errors: errors.array(),
-    });
-  }
-
   try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("error", {
+        errors: errors.array(),
+      });
+    }
     const newUserData = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,

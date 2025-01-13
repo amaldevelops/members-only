@@ -26,7 +26,7 @@ const validateUserCreation = [
     .isEmail()
     .normalizeEmail() // Sanitizes and normalizes email input
     .withMessage(`Username: ${emailError}`)
-    .isLength({ min: 5, max: 30 })
+    .isLength({ min: 5, max: 50 })
     .withMessage(`Username: ${lengthErr}`),
   body("password")
     .trim()
