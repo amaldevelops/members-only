@@ -42,6 +42,14 @@ async function userNotAuthorized(req, res, next) {
 
 async function AuthorizedNewMessageSave(req, res, next) {
   try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("error", {
+        errors: errors.array(),
+      });
+    }
+
     const newMessage = {
       title: req.body.title,
       content: req.body.content,
@@ -51,6 +59,10 @@ async function AuthorizedNewMessageSave(req, res, next) {
 
     // console.log(newMessage);
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
+
+    const allMessages = await db.SQLAuthorizedGetAllMessages();
+    // console.log(allMessages);
+    res.render("authorized", { allMessages: allMessages });
   } catch (err) {
     next(err);
     // res.send("Invalid Signup form")
@@ -59,6 +71,14 @@ async function AuthorizedNewMessageSave(req, res, next) {
 
 async function AuthenticateUser(req, res, next) {
   try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("error", {
+        errors: errors.array(),
+      });
+    }
+
     const authenticationData = {
       username: req.body.username,
       password: req.body.password,
