@@ -11,7 +11,6 @@ const session = require("express-session");
 async function homePageNotLogged(req, res, next) {
   try {
     const allMessages = await db.SQLUnauthorizedGetAllMessages();
-    // console.log(allMessages);
     res.render("index", { allMessages: allMessages });
   } catch (err) {
     next(err);
@@ -24,6 +23,16 @@ async function newMessage(req, res, next) {
   } catch (err) {
     next(err);
   }
+}
+
+async function userAuthenticationFormValidation(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("error", {
+      errors: errors.array(),
+    });
+  }
+  next();
 }
 
 async function userAuthorized(req, res, next) {
@@ -71,36 +80,34 @@ async function AuthorizedNewMessageSave(req, res, next) {
   }
 }
 
-async function AuthenticateUser(req, res, next) {
-  try {
-    const errors = validationResult(req);
+// async function AuthenticateUser(req, res, next) {
+//   try {
+//     const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(400).render("error", {
-        errors: errors.array(),
-      });
-    }
+//     if (!errors.isEmpty()) {
+//       return res.status(400).render("error", {
+//         errors: errors.array(),
+//       });
+//     }
 
-    const authenticationData = {
-      username: req.body.username,
-      password: req.body.password,
-    };
+//     const authenticationData = {
+//       username: req.body.username,
+//       password: req.body.password,
+//     };
 
-    const checkForUserDetails = await db.SQLAuthenticateUser(
-      authenticationData
-    );
-    // console.log(authenticationData);
-    // console.log(checkForUserDetails);
+//     const checkForUserDetails = await db.SQLAuthenticateUser(
+//       authenticationData
+//     );
 
-    if (checkForUserDetails.success === true) {
-      res.render("authorized");
-    } else {
-      res.render("notAuthorized");
-    }
-  } catch (err) {
-    next(err);
-  }
-}
+//     if (checkForUserDetails.success === true) {
+//       res.render("authorized");
+//     } else {
+//       res.render("notAuthorized");
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// }
 
 async function NewUserCreate(req, res, next) {
   try {
@@ -162,7 +169,6 @@ async function DeleteMessage(req, res, next) {
 }
 
 module.exports = {
-  AuthenticateUser,
   NewUserCreate,
   homePageNotLogged,
   newMessage,
@@ -170,4 +176,5 @@ module.exports = {
   userAuthorized,
   userNotAuthorized,
   AuthorizedNewMessageSave,
+  userAuthenticationFormValidation,
 };

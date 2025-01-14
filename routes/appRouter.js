@@ -18,7 +18,7 @@ const {
 } = require("../validators/newMessageFormValidation");
 
 appRouter.post(
-  "/",
+  "/",validateUserLogin,membersController.userAuthenticationFormValidation,
   passport.authenticate("local", {
     successRedirect: "/authorized",
     failureRedirect: "/notauthorized",
