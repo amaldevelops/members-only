@@ -18,7 +18,9 @@ const {
 } = require("../validators/newMessageFormValidation");
 
 appRouter.post(
-  "/",validateUserLogin,membersController.userAuthenticationFormValidation,
+  "/",
+  validateUserLogin,
+  membersController.userAuthenticationFormValidation,
   passport.authenticate("local", {
     successRedirect: "/authorized",
     failureRedirect: "/notauthorized",
@@ -27,9 +29,7 @@ appRouter.post(
 
 appRouter.get("/", membersController.homePageNotLogged);
 
-// appRouter.post("/", validateUserLogin, membersController.AuthenticateUser);
-
-appRouter.get("/new", membersController.newMessage);
+appRouter.get("/new", ensureAuthentication,membersController.newMessage);
 
 appRouter.post(
   "/new",
@@ -43,7 +43,6 @@ appRouter.get(
   membersController.userAuthorized
 );
 
-// Create User Signup form with Form validation and sanitization (validateUserCreation)
 appRouter.post(
   "/accountcreated",
   validateUserCreation,
