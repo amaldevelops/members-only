@@ -1,8 +1,13 @@
 const db = require("../db/dbQueries");
 
+const pool = require("../db/pool");
+
 const { body, validationResult } = require("express-validator");
 
 require("dotenv").config();
+
+const session = require("express-session");
+
 
 async function homePageNotLogged(req, res, next) {
   try {
