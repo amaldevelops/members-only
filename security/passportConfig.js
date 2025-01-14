@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 
 const pool = require("../db/pool");
 
+const membersController = require("../controllers/membersController");
+
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -28,7 +30,6 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
-  _;
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -44,4 +45,14 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = passport;
+function ensureAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    console.log("USER AUTHENTICATED");
+
+    return next();
+  }
+  console.log("USER NOT AUTHENTICATED");
+  res.redirect("/notauthorized");
+}
+
+module.exports = { passport, ensureAuthentication };

@@ -8,11 +8,10 @@ require("dotenv").config();
 
 const session = require("express-session");
 
-
 async function homePageNotLogged(req, res, next) {
   try {
     const allMessages = await db.SQLUnauthorizedGetAllMessages();
-    console.log(allMessages);
+    // console.log(allMessages);
     res.render("index", { allMessages: allMessages });
   } catch (err) {
     next(err);
@@ -91,7 +90,7 @@ async function AuthenticateUser(req, res, next) {
       authenticationData
     );
     // console.log(authenticationData);
-    console.log(checkForUserDetails);
+    // console.log(checkForUserDetails);
 
     if (checkForUserDetails.success === true) {
       res.render("authorized");
@@ -143,7 +142,7 @@ async function NewUserCreate(req, res, next) {
 
     res.render("accountcreated");
 
-    console.log(newUserData);
+    // console.log(newUserData);
   } catch (err) {
     console.error("Error Creating user:", err.message);
     next(err);
@@ -153,7 +152,7 @@ async function NewUserCreate(req, res, next) {
 async function DeleteMessage(req, res, next) {
   try {
     const messageID = req.params.id;
-    console.log(messageID);
+    // console.log(messageID);
 
     await db.SQLDeleteMessage(messageID);
     res.render("messagedeleted");

@@ -1,10 +1,13 @@
 const express = require("express");
+
 const session = require("express-session");
 
-const passport = require("./security/passportConfig");
+const { passport } = require("./security/passportConfig");
 
 const app = express();
+
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(passport.session());
 
 const path = require("node:path");
 const assetsPath = path.join(__dirname, "public");
@@ -19,8 +22,6 @@ app.set("views", path.join(__dirname, "views"));
 
 const appRouter = require("./routes/appRouter");
 app.use("/", appRouter);
-
-app.use(passport.session());
 
 // Error Handling
 

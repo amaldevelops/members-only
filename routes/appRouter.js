@@ -2,9 +2,10 @@ const { Router } = require("express");
 
 const appRouter = Router();
 
-const passport = require("../security/passportConfig");
-
-// const session = require("express-session");
+const {
+  passport,
+  ensureAuthentication,
+} = require("../security/passportConfig");
 
 const membersController = require("../controllers/membersController");
 
@@ -26,7 +27,7 @@ appRouter.post(
 
 appRouter.get("/", membersController.homePageNotLogged);
 
-appRouter.post("/", validateUserLogin, membersController.AuthenticateUser);
+// appRouter.post("/", validateUserLogin, membersController.AuthenticateUser);
 
 appRouter.get("/new", membersController.newMessage);
 
@@ -36,7 +37,11 @@ appRouter.post(
   membersController.AuthorizedNewMessageSave
 );
 
-appRouter.get("/authorized", membersController.userAuthorized);
+appRouter.get(
+  "/authorized",
+  ensureAuthentication,
+  membersController.userAuthorized
+);
 
 // Create User Signup form with Form validation and sanitization (validateUserCreation)
 appRouter.post(
