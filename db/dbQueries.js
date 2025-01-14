@@ -46,6 +46,8 @@ async function SQLNewUserCreate(newUserData) {
       newUserData.admin,
     ];
 
+    console.log(createUserData);
+
     const { rows } = await pool.query(query, createUserData);
   } catch (error) {
     console.error("Error Saving message - Authorized state", error.message);

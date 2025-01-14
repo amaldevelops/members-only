@@ -2,6 +2,10 @@ const db = require("../db/dbQueries");
 
 const pool = require("../db/pool");
 
+// const bcrypt = require("../app");
+
+const bcrypt = require("bcryptjs");
+
 const { body, validationResult } = require("express-validator");
 
 require("dotenv").config();
@@ -145,11 +149,16 @@ async function NewUserCreate(req, res, next) {
       newUserData.admin = false;
     }
 
-    const createUser = await db.SQLNewUserCreate(newUserData);
+    bcrypt.hash(newUserData.password, 10, async (err, hashedPassword) => {
+      if (err) {
+        return next(err);
+      }
+      newUserData.password = hashedPassword;
+      console.log(newUserData.password);
+      const createUser = await db.SQLNewUserCreate(newUserData);
 
-    res.render("accountcreated");
-
-    // console.log(newUserData);
+      res.render("accountcreated");
+    });
   } catch (err) {
     console.error("Error Creating user:", err.message);
     next(err);
