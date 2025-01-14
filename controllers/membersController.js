@@ -168,6 +168,15 @@ async function DeleteMessage(req, res, next) {
   }
 }
 
+async function logOut(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.render("logOut");
+  });
+}
+
 module.exports = {
   NewUserCreate,
   homePageNotLogged,
@@ -177,4 +186,5 @@ module.exports = {
   userNotAuthorized,
   AuthorizedNewMessageSave,
   userAuthenticationFormValidation,
+  logOut,
 };
