@@ -149,19 +149,14 @@ async function NewUserCreate(req, res, next) {
       newUserData.admin = false;
     }
 
-    bcrypt.hash(newUserData.password, 10, async (err, hashedPassword) => {
-      if (err) {
-        return next(err);
-      }
-      newUserData.password = hashedPassword;
-      console.log(newUserData.password);
-      const createUser = await db.SQLNewUserCreate(newUserData);
+    newUserData.password = await bcrypt.hash(newUserData.password, 10);
+    console.log(newUserData.password);
+    await db.SQLNewUserCreate(newUserData);
 
-      res.render("accountcreated");
-    });
-  } catch (err) {
-    console.error("Error Creating user:", err.message);
-    next(err);
+    res.render("accountcreated");
+  } catch (errors) {
+    console.error("Error Creating user:", errors.message);
+    return res.status(500).render("error Creating User");
   }
 }
 
