@@ -23,7 +23,7 @@ async function homePageNotLogged(req, res, next) {
 
 async function newMessage(req, res, next) {
   try {
-    res.render("newMessage");
+    res.render("newMessage",{loggedInUserDetails:req.user});
   } catch (err) {
     next(err);
   }
@@ -81,7 +81,7 @@ async function AuthorizedNewMessageSave(req, res, next) {
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
 
     const allMessages = await db.SQLAuthorizedGetAllMessages();
-    res.render("authorized", { allMessages: allMessages });
+    res.render("authorized", { allMessages: allMessages,loggedInUserDetails: req.user});
   } catch (err) {
     next(err);
     // res.send("Invalid Signup form")

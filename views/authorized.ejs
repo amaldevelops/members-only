@@ -8,7 +8,10 @@
   <body>
     <div>
       <a href="/logOut">Logout</a>
-      <h1>Successfully Logged in ! Welcome <%=loggedInUserDetails.first_name%> To Casio Watch Club</h1>
+      <h1>
+        Successfully Logged in ! Welcome <%=loggedInUserDetails.first_name%> To
+        Casio Watch Club
+      </h1>
     </div>
     <div>
       <div>
@@ -36,9 +39,8 @@
         </ul>
       </div>
       <%if(loggedInUserDetails.membership_status===true){%>
-<a href="/new">Create New Message</a>
+      <a href="/new">Create New Message</a>
       <%}%>
-      
     </div>
   </body>
 </html>

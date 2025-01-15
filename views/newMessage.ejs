@@ -16,10 +16,10 @@
         <input type="text" name="content" id="content" /><br />
 
         <label for="author_name">Author Name:</label><br />
-        <input type="text" name="author_name" id="author_name" value="Jean Luc" readonly/><br />
+        <input type="text" name="author_name" id="author_name" value=<%=loggedInUserDetails.first_name%> readonly/><br />
 
         <label for="author_id">Author Id</label><br />
-        <input type="text" name="author_id" id="author_id" value="1" readonly /><br />
+        <input type="text" name="author_id" id="author_id" value=<%=loggedInUserDetails.id%> readonly /><br />
 
         <button type="submit">Create Message</button>
       </form>
