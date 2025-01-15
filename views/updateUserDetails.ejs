@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update User Details</title>
+
+    <div>
+      <a href="/authorized">Back To Members Area</a>
+      <form method="POST" action="/updateuserdetails">
+        <h1>Apply For Membership</h1>
+
+        <label for="membership_status">Membership Invitation Code</label><br />
+        <input
+          type="text"
+          name="membership_status"
+          id="membership_status"
+        /><br />
+
+        <label for="author_name">User Name</label><br />
+        <input
+          type="text"
+          name="author_name"
+          id="author_name"
+          value="<%=loggedInUserDetails.username%>"
+          readonly
+        /><br />
+
+        <label for="author_id">User Id</label><br />
+        <input
+          type="text"
+          name="author_id"
+          id="author_id"
+          value="<%=loggedInUserDetails.id%>"
+          readonly
+        /><br />
+
+        <button type="submit">Update Membership Status</button>
+      </form>
+    </div>
+  </head>
+  <body></body>
+</html>

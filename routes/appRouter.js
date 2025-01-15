@@ -51,6 +51,9 @@ appRouter.post(
   membersController.NewUserCreate
 );
 
+appRouter.get("/updateuserdetails", membersController.getUpdateUserDetails);
+appRouter.post("/updateuserdetails", membersController.PostUpdateUserDetails);
+
 appRouter.post("/messagedeleted:id", membersController.DeleteMessage);
 
 appRouter.get("/notauthorized", membersController.userNotAuthorized);

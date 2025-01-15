@@ -115,6 +115,17 @@ async function SQLDeleteMessage(id) {
   }
 }
 
+async function SQLUpdateUserDetails(id) {
+  try {
+    const query = "UPDATE users_table SET membership_status=true WHERE id=$1;";
+    console.log(id);
+    const { rows } = await pool.query(query, [id]);
+  } catch (error) {
+    console.error("Error Updating User - Authorized state", error.message);
+    throw error;
+  }
+}
+
 module.exports = {
   SQLAuthenticateUser,
   SQLNewUserCreate,
@@ -122,4 +133,5 @@ module.exports = {
   SQLUnauthorizedGetAllMessages,
   SQLAuthorizedGetAllMessages,
   SQLAuthorizedNewMessageSave,
+  SQLUpdateUserDetails,
 };

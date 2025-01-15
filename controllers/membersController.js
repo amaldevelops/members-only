@@ -154,6 +154,32 @@ async function logOut(req, res, next) {
   });
 }
 
+async function getUpdateUserDetails(req, res, next) {
+  try {
+    res.render("updateUserDetails", { loggedInUserDetails: req.user });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function PostUpdateUserDetails(req, res, next) {
+  try {
+    const newUserData = {
+      membership_status: req.body.membership_status,
+    };
+
+    if (newUserData.membership_status === process.env.INVITATION_CODE) {
+      await db.SQLUpdateUserDetails(req.user.id);
+    } else {
+      newUserData.membership_status = false;
+    }
+
+    res.redirect("/authorized");
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   NewUserCreate,
   homePageNotLogged,
@@ -164,4 +190,6 @@ module.exports = {
   AuthorizedNewMessageSave,
   userAuthenticationFormValidation,
   logOut,
+  getUpdateUserDetails,
+  PostUpdateUserDetails,
 };

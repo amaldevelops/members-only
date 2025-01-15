@@ -12,6 +12,14 @@
         Successfully Logged in ! Welcome <%=loggedInUserDetails.first_name%> To
         Casio Watch Club
       </h1>
+
+      <h2>Membership: <%=loggedInUserDetails.membership_status%></h2>
+
+      <%if (loggedInUserDetails.membership_status===false){%>
+      <a href="/updateUserDetails">Apply For Membership</a>
+      <%}%>
+
+      <h2>Admin:<%=loggedInUserDetails.admin%></h2>
     </div>
     <div>
       <div>
