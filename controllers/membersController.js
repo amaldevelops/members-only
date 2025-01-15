@@ -2,8 +2,6 @@ const db = require("../db/dbQueries");
 
 const pool = require("../db/pool");
 
-// const bcrypt = require("../app");
-
 const bcrypt = require("bcryptjs");
 
 const { body, validationResult } = require("express-validator");
@@ -23,7 +21,7 @@ async function homePageNotLogged(req, res, next) {
 
 async function newMessage(req, res, next) {
   try {
-    res.render("newMessage",{loggedInUserDetails:req.user});
+    res.render("newMessage", { loggedInUserDetails: req.user });
   } catch (err) {
     next(err);
   }
@@ -42,7 +40,6 @@ async function userAuthenticationFormValidation(req, res, next) {
 async function userAuthorized(req, res, next) {
   try {
     const allMessages = await db.SQLAuthorizedGetAllMessages();
-    // console.log(allMessages);
     console.log(`User is: ${req.user.id}`);
     res.render("authorized", {
       allMessages: allMessages,
@@ -81,41 +78,14 @@ async function AuthorizedNewMessageSave(req, res, next) {
     const messageSave = await db.SQLAuthorizedNewMessageSave(newMessage);
 
     const allMessages = await db.SQLAuthorizedGetAllMessages();
-    res.render("authorized", { allMessages: allMessages,loggedInUserDetails: req.user});
+    res.render("authorized", {
+      allMessages: allMessages,
+      loggedInUserDetails: req.user,
+    });
   } catch (err) {
     next(err);
-    // res.send("Invalid Signup form")
   }
 }
-
-// async function AuthenticateUser(req, res, next) {
-//   try {
-//     const errors = validationResult(req);
-
-//     if (!errors.isEmpty()) {
-//       return res.status(400).render("error", {
-//         errors: errors.array(),
-//       });
-//     }
-
-//     const authenticationData = {
-//       username: req.body.username,
-//       password: req.body.password,
-//     };
-
-//     const checkForUserDetails = await db.SQLAuthenticateUser(
-//       authenticationData
-//     );
-
-//     if (checkForUserDetails.success === true) {
-//       res.render("authorized");
-//     } else {
-//       res.render("notAuthorized");
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// }
 
 async function NewUserCreate(req, res, next) {
   try {
@@ -167,7 +137,6 @@ async function NewUserCreate(req, res, next) {
 async function DeleteMessage(req, res, next) {
   try {
     const messageID = req.params.id;
-    // console.log(messageID);
 
     await db.SQLDeleteMessage(messageID);
     res.render("messagedeleted");

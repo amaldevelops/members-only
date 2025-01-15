@@ -29,9 +29,9 @@ appRouter.post(
 
 appRouter.get("/", membersController.homePageNotLogged);
 
-appRouter.get("/logOut", membersController.logOut)
+appRouter.get("/logOut", membersController.logOut);
 
-appRouter.get("/new", ensureAuthentication,membersController.newMessage);
+appRouter.get("/new", ensureAuthentication, membersController.newMessage);
 
 appRouter.post(
   "/new",

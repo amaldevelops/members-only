@@ -14,18 +14,15 @@ passport.use(
         [username]
       );
       const user = rows[0];
-      // console.log(rows);
       if (!user) {
         return done(null, false, { message: "Incorrect Username" });
       }
       const match = await bcrypt.compare(password, user.password);
 
-      // if (user.password !== password) {
       if (!match) {
         return done(null, false, { message: "Incorrect Password" });
       }
-      // res.locals.currentUser=req.user; 
-      // console.log(`User is: ${user.id}`);
+
       return done(null, user);
     } catch (err) {
       return done(err);
