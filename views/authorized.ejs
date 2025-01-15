@@ -8,11 +8,12 @@
   <body>
     <div>
       <a href="/logOut">Logout</a>
-      <h1>Logged in ! Welcome To Casio Watch Club</h1>
+      <h1>Successfully Logged in ! Welcome <%=loggedInUserDetails.first_name%> To Casio Watch Club</h1>
     </div>
     <div>
       <div>
         <h1>Latest Messages</h1>
+        <p></p>
         <ul>
           <%if (allMessages.length>0){%> <%allMessages.forEach(result=>{ %>
           <li>
@@ -21,7 +22,7 @@
             <strong>User:</strong> <%=result.first_name%>,
             <strong>Title:</strong> <%=result.title%>,
             <strong>Content :</strong> <%=result.content%>
-            <%if(result.admin===true){%>
+            <%if(loggedInUserDetails.admin===true){%>
 
             <form method="post" action="/messagedeleted<%=result.id%>">
               <button type="submit">Delete Message (Only Admins)</button>
@@ -34,8 +35,10 @@
           <%}%>
         </ul>
       </div>
-
-      <a href="/new">Create New Message</a>
+      <%if(loggedInUserDetails.membership_status===true){%>
+<a href="/new">Create New Message</a>
+      <%}%>
+      
     </div>
   </body>
 </html>

@@ -14,6 +14,7 @@ passport.use(
         [username]
       );
       const user = rows[0];
+      // console.log(rows);
       if (!user) {
         return done(null, false, { message: "Incorrect Username" });
       }
@@ -23,6 +24,8 @@ passport.use(
       if (!match) {
         return done(null, false, { message: "Incorrect Password" });
       }
+      // res.locals.currentUser=req.user; 
+      // console.log(`User is: ${user.id}`);
       return done(null, user);
     } catch (err) {
       return done(err);

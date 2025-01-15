@@ -43,7 +43,11 @@ async function userAuthorized(req, res, next) {
   try {
     const allMessages = await db.SQLAuthorizedGetAllMessages();
     // console.log(allMessages);
-    res.render("authorized", { allMessages: allMessages });
+    console.log(`User is: ${req.user.id}`);
+    res.render("authorized", {
+      allMessages: allMessages,
+      loggedInUserDetails: req.user,
+    });
   } catch (err) {
     next(err);
   }
