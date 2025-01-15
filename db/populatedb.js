@@ -4,6 +4,10 @@ const { Client } = require("pg");
 
 require("dotenv").config();
 
+const bcrypt = require("bcryptjs");
+
+await bcrypt.hash(password, 10);
+
 const SQL = `
 CREATE TABLE IF NOT EXISTS users_table(
 id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
