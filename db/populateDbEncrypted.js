@@ -81,7 +81,7 @@ async function main() {
   console.log("Seeding data to database....");
 
   const client = new Client({
-    connectionString: `${process.env.URI_LOCAL_MACHINE}`,
+    connectionString: `${process.env.URI_PRODUCTION}`,
     ssl: {
       rejectUnauthorized: false,
     },
