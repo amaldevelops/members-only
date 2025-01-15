@@ -23,8 +23,6 @@ app.set("views", path.join(__dirname, "views"));
 const appRouter = require("./routes/appRouter");
 app.use("/", appRouter);
 
-// const bcrypt = require("bcryptjs");
-
 // Error Handling
 
 app.use((req, res) => {
@@ -43,5 +41,3 @@ app.use((err, req, res, next) => {
 app.listen(process.env.APP_PORT || 3000, () =>
   console.log(`Members Only Site Running on localhost:${process.env.APP_PORT}`)
 );
-
-// module.exports=bcrypt;

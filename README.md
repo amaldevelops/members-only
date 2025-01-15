@@ -8,14 +8,19 @@ An exclusive Membership site where members can post anonymous messages. Non-memb
 
 Deployed on:
 
-- **Koyeb PaaS**: [Live Demo](#)
+- **Render & Koyeb PaaS**:
+
+```
+https://nodejs-membersonly.onrender.com/
+
+```
 
 ---
 
 ## Source Code
 
 ```
-   https://github.com/1Amal/NodeJs-MembersOnly
+https://github.com/1Amal/NodeJs-MembersOnly
 ```
 
 ## 🛠️ Tech Stack
@@ -94,7 +99,7 @@ Stores messages created by users.
    git clone git@github.com:1Amal/NodeJs-MembersOnly.git
    cd clubhouse-message-board
 
-Install Dependencies:
+2. Install Dependencies:
 
 ```
 npm install
@@ -110,7 +115,7 @@ DB_PORT=5432
 SECRET=your-passport-secret
 ```
 
-Start the Server:
+3. Start the Server:
 
 ```
 npm start
